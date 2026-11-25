@@ -1,7 +1,7 @@
 import { Component, OnInit, computed, inject } from '@angular/core';
 import { TASK_STATUS_ORDER, TaskStore } from '@entities/task';
 import { UserStore } from '@entities/user';
-import { FilterTasksStore, filterTasks } from '@features/filter-tasks';
+import { FilterTasksStore, filterTasks } from '@features/task/filter';
 import { BoardColumn } from './board-column';
 import { BoardStats } from './board-stats';
 import { BoardToolbar } from './board-toolbar';

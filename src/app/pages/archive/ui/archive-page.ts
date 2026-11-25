@@ -2,11 +2,11 @@ import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TaskCard, TaskStore, type Task } from '@entities/task';
 import { UserAvatar, UserStore, type User } from '@entities/user';
-import { AssignTaskControl } from '@features/assign-task';
-import { DeleteTaskButton } from '@features/delete-task';
-import { EditTaskForm } from '@features/edit-task';
-import { FilterTasksBar, FilterTasksStore, filterTasks } from '@features/filter-tasks';
-import { MoveTaskButtons } from '@features/move-task';
+import { AssignTaskControl } from '@features/task/assign';
+import { DeleteTaskButton } from '@features/task/delete';
+import { EditTaskForm } from '@features/task/edit';
+import { FilterTasksBar, FilterTasksStore, filterTasks } from '@features/task/filter';
+import { MoveTaskButtons } from '@features/task/move';
 import { UiIcon, UiIconButton } from '@shared/ui';
 
 @Component({

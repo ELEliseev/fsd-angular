@@ -57,16 +57,18 @@ export const LAYERS: readonly LayerInfo[] = [
     alias: '@features',
     used: true,
     purpose:
-      'Пользовательские действия с бизнес-ценностью: то, что люди хотят сделать с сущностями. У каждой фичи свои ui и model; фичи не импортируют друг друга.',
+      'Пользовательские действия с бизнес-ценностью: то, что люди хотят сделать с сущностями. У каждой фичи свои ui и model; фичи не импортируют друг друга. Слайсы сгруппированы по доменам: task/ и comment/.',
     contents: [
-      'create-task/ — форма создания задачи',
-      'edit-task/ — редактирование (форма на linkedSignal)',
-      'move-task/ — перенос задачи между колонками',
-      'delete-task/ — удаление с подтверждением',
-      'assign-task/ — назначение исполнителя из entities/user',
-      'filter-tasks/ — поиск и фильтр по приоритету (своё состояние)',
-      'add-comment/ — добавление комментария к задаче',
-      'delete-comment/ — удаление комментария с подтверждением',
+      'task/ — группа слайсов домена задач',
+      'task/create — форма создания задачи',
+      'task/edit — редактирование (форма на linkedSignal)',
+      'task/move — перенос задачи между колонками',
+      'task/delete — удаление с подтверждением',
+      'task/assign — назначение исполнителя (работает с task и user, но меняет task)',
+      'task/filter — поиск и фильтр по приоритету (своё состояние)',
+      'comment/ — группа слайсов домена комментариев',
+      'comment/add — добавление комментария к задаче',
+      'comment/delete — удаление комментария с подтверждением',
     ],
   },
   {
@@ -110,7 +112,11 @@ export const RULES: readonly RuleInfo[] = [
   },
   {
     title: 'Публичный API',
-    text: 'Каждый слайс (и сегмент в shared/app) отдаёт наружу только index.ts с явными ре-экспортами — без export *. Внутри слайса импорты относительные, между слайсами — через алиасы: @entities/task, @features/move-task.',
+    text: 'Каждый слайс (и сегмент в shared/app) отдаёт наружу только index.ts с явными ре-экспортами — без export *. Внутри слайса импорты относительные, между слайсами — через алиасы: @entities/task, @features/task/move.',
+  },
+  {
+    title: 'Группы слайсов',
+    text: 'task/ и comment/ в features — навигационные группы, а не слайсы: у них нет своих сегментов, index.ts и общего кода. Изоляция слайсов внутри групп не меняется. Имена слайсов без суффикса домена (create, а не create-task) — иначе правило repetitive-naming ругается на слово, повторяющееся во всех именах группы.',
   },
   {
     title: 'Изоляция слайсов и @x',
@@ -132,12 +138,12 @@ export const ACTION_TRACE: readonly TraceStep[] = [
   },
   {
     step: 'MoveTaskButtons.move()',
-    where: 'features/move-task/ui',
+    where: 'features/task/move/ui',
     detail: 'UI фичи вызывает собственный model, а не стор напрямую.',
   },
   {
     step: 'MoveTask.execute()',
-    where: 'features/move-task/model',
+    where: 'features/task/move/model',
     detail: 'Вычисляет соседний статус и передаёт обновлённую задачу в стор сущности.',
   },
   {
@@ -160,7 +166,7 @@ export interface ExerciseInfo {
 export const EXERCISES: readonly ExerciseInfo[] = [
   {
     title: 'Фильтр по исполнителю',
-    text: 'Расширь filter-tasks полем assignee или добавь отдельную фичу. Состояние фильтра принадлежит фиче, а не сущности — проверь, что TaskStore при этом не меняется.',
+    text: 'Расширь фичу task/filter полем assigneeId или добавь отдельную фичу. Состояние фильтра принадлежит фиче, а не сущности — проверь, что TaskStore при этом не меняется.',
   },
   {
     title: 'Сущность project',

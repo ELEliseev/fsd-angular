@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
-import { CreateTaskForm } from '@features/create-task';
-import { FilterTasksBar } from '@features/filter-tasks';
+import { CreateTaskForm } from '@features/task/create';
+import { FilterTasksBar } from '@features/task/filter';
 import { UiButton, UiIcon } from '@shared/ui';
 
 @Component({

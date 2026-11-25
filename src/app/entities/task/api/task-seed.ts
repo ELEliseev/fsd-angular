@@ -28,7 +28,7 @@ export function createSeedTasks(): readonly Task[] {
     {
       id: 'seed-3',
       title: 'Добавить фильтр по приоритету',
-      description: 'Состояние фильтра принадлежит фиче filter-tasks, а не сущности.',
+      description: 'Состояние фильтра принадлежит фиче task/filter, а не сущности.',
       status: 'in-progress',
       priority: 'high',
       assigneeId: 'u1',
@@ -46,7 +46,7 @@ export function createSeedTasks(): readonly Task[] {
     {
       id: 'seed-5',
       title: 'Придумать фильтр по исполнителю',
-      description: 'Упражнение: расширь filter-tasks или добавь отдельную фичу.',
+      description: 'Упражнение: расширь task/filter или добавь отдельную фичу.',
       status: 'backlog',
       priority: 'medium',
       assigneeId: null,

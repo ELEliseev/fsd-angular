@@ -3,8 +3,8 @@ import { RouterLink } from '@angular/router';
 import { CommentItem, CommentStore } from '@entities/comment';
 import { TaskCard, TaskStore, type Task } from '@entities/task';
 import { UserAvatar, UserStore, type User } from '@entities/user';
-import { AddCommentForm } from '@features/add-comment';
-import { DeleteCommentButton } from '@features/delete-comment';
+import { AddCommentForm } from '@features/comment/add';
+import { DeleteCommentButton } from '@features/comment/delete';
 import { UiIcon } from '@shared/ui';
 
 @Component({
