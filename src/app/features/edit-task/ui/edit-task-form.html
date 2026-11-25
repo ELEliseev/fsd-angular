@@ -1,0 +1,16 @@
+<form class="edit-form" (submit)="onSubmit($event)">
+  <ui-input label="Название" [(value)]="title" />
+  <div class="edit-form__row">
+    <ui-select
+      label="Приоритет"
+      [options]="priorityOptions"
+      [value]="priority()"
+      (valueChange)="setPriority($event)"
+    />
+  </div>
+  <ui-input label="Описание" [multiline]="true" [(value)]="description" />
+  <div class="edit-form__actions">
+    <ui-button type="submit" [disabled]="!canSubmit()">Сохранить</ui-button>
+    <ui-button variant="ghost" (click)="cancelled.emit()">Отмена</ui-button>
+  </div>
+</form>

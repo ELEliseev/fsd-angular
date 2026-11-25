@@ -7,6 +7,11 @@ export const routes: Routes = [
     loadComponent: () => import('@pages/board').then((m) => m.BoardPage),
   },
   {
+    path: 'archive',
+    title: 'Архив — FSD Tasks',
+    loadComponent: () => import('@pages/archive').then((m) => m.ArchivePage),
+  },
+  {
     path: 'architecture',
     title: 'Архитектура — FSD Tasks',
     loadComponent: () => import('@pages/architecture').then((m) => m.ArchitecturePage),

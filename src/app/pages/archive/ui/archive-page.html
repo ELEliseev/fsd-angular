@@ -1,0 +1,39 @@
+<section class="archive">
+  <div class="archive__head">
+    <h1>Архив</h1>
+    <p class="archive__subtitle">
+      Выполненные задачи. Фичи <code>filter-tasks</code>, <code>move-task</code>,
+      <code>delete-task</code>, <code>edit-task</code> и <code>assign-task</code> переиспользуются с
+      доски без изменений — меняется только композиция.
+    </p>
+  </div>
+
+  <filter-tasks-bar />
+
+  <div class="archive__list">
+    @for (task of doneTasks(); track task.id) {
+      @if (editingId() === task.id) {
+        <edit-task-form
+          [task]="task"
+          (saved)="editingId.set(null)"
+          (cancelled)="editingId.set(null)"
+        />
+      } @else {
+        <task-card [task]="task">
+          <div card-actions class="card-actions">
+            <assign-task-control [task]="task" />
+            <div class="card-actions__buttons">
+              <ui-icon-button label="Редактировать задачу" (click)="editingId.set(task.id)">
+                <ui-icon name="pencil" />
+              </ui-icon-button>
+              <move-task-buttons [task]="task" />
+              <delete-task-button [task]="task" />
+            </div>
+          </div>
+        </task-card>
+      }
+    } @empty {
+      <p class="archive__empty">В архиве пока пусто — перенеси задачу в «Готово» на доске.</p>
+    }
+  </div>
+</section>

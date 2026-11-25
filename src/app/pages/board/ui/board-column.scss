@@ -69,5 +69,14 @@
 .card-actions {
   display: flex;
   align-items: center;
-  gap: 0.15rem;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+  }
 }

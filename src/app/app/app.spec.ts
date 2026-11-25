@@ -22,6 +22,6 @@ describe('App', () => {
     const links = Array.from(el.querySelectorAll('app-header nav a')).map((a) =>
       a.textContent?.trim(),
     );
-    expect(links).toEqual(['Доска', 'Архитектура']);
+    expect(links).toEqual(['Доска', 'Архив', 'Архитектура']);
   });
 });

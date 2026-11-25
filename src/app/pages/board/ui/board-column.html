@@ -6,12 +6,26 @@
   </header>
   <div class="column__list">
     @for (task of tasks(); track task.id) {
-      <task-card [task]="task">
-        <div card-actions class="card-actions">
-          <move-task-buttons [task]="task" />
-          <delete-task-button [task]="task" />
-        </div>
-      </task-card>
+      @if (editingId() === task.id) {
+        <edit-task-form
+          [task]="task"
+          (saved)="editingId.set(null)"
+          (cancelled)="editingId.set(null)"
+        />
+      } @else {
+        <task-card [task]="task">
+          <div card-actions class="card-actions">
+            <assign-task-control [task]="task" />
+            <div class="card-actions__buttons">
+              <ui-icon-button label="Редактировать задачу" (click)="editingId.set(task.id)">
+                <ui-icon name="pencil" />
+              </ui-icon-button>
+              <move-task-buttons [task]="task" />
+              <delete-task-button [task]="task" />
+            </div>
+          </div>
+        </task-card>
+      }
     } @empty {
       <p class="column__empty">Пока пусто</p>
     }

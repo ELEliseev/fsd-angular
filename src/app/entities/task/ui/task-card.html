@@ -1,7 +1,15 @@
 <article class="card">
   <div class="card__meta">
     <priority-badge [priority]="task().priority" />
-    <time class="card__date">{{ createdAt() }}</time>
+    <div class="card__meta-right">
+      @if (task().assignee; as assignee) {
+        <span class="card__assignee">
+          <user-avatar [user]="assignee" />
+          {{ assignee.name }}
+        </span>
+      }
+      <time class="card__date">{{ createdAt() }}</time>
+    </div>
   </div>
   <h3 class="card__title">{{ task().title }}</h3>
   @if (task().description) {

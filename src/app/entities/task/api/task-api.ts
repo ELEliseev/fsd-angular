@@ -13,7 +13,8 @@ export class TaskApi {
   getAll(): readonly Task[] {
     const stored = this.db.read<readonly Task[]>(TABLE);
     if (stored !== null) {
-      return stored;
+      // данные до появления исполнителя могли сохраниться без поля assignee
+      return stored.map((task) => ({ ...task, assignee: task.assignee ?? null }));
     }
     const seed = createSeedTasks();
     this.db.write(TABLE, seed);

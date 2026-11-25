@@ -38,6 +38,7 @@ export const LAYERS: readonly LayerInfo[] = [
       'Экраны приложения. Страница компонует features и entities в готовый экран; её собственные UI-блоки (колонки, тулбар, статистика) живут внутри слайса страницы.',
     contents: [
       'board/ — канбан-доска: board-page, board-column, board-stats, board-toolbar',
+      'archive/ — выполненные задачи, переиспользует фичи доски',
       'architecture/ — эта страница: ui + model с данными карты слоёв',
     ],
   },
@@ -58,8 +59,10 @@ export const LAYERS: readonly LayerInfo[] = [
       'Пользовательские действия с бизнес-ценностью: то, что люди хотят сделать с сущностями. У каждой фичи свои ui и model; фичи не импортируют друг друга.',
     contents: [
       'create-task/ — форма создания задачи',
+      'edit-task/ — редактирование (форма на linkedSignal)',
       'move-task/ — перенос задачи между колонками',
       'delete-task/ — удаление с подтверждением',
+      'assign-task/ — назначение исполнителя из entities/user',
       'filter-tasks/ — поиск и фильтр по приоритету (своё состояние)',
     ],
   },
@@ -73,6 +76,8 @@ export const LAYERS: readonly LayerInfo[] = [
       'task/model — типы, метаданные статусов, TaskStore на signals',
       'task/api — запросы к mock-бэкенду, стартовые данные',
       'task/ui — task-card, priority-badge',
+      'user/ — исполнитель: model, api, ui (user-avatar)',
+      'user/@x/task — cross-import API: тип User и UserAvatar для сущности task',
     ],
   },
   {
@@ -106,7 +111,7 @@ export const RULES: readonly RuleInfo[] = [
   },
   {
     title: 'Изоляция слайсов и @x',
-    text: 'Слайсы одного слоя не знают друг о друге. Если entities связаны в реальном мире, связь оформляется явным cross-import API: entities/task/@x/user. Логику взаимодействия лучше держать выше — в features или pages.',
+    text: 'Слайсы одного слоя не знают друг о друге. Связь task → user оформлена явным cross-import API: entities/user/@x/task отдаёт тип User и UserAvatar только для task. Task.assignee хранит снапшот пользователя — как Artist.songs в примере из спецификации; логику назначения держит features/assign-task.',
   },
 ];
 
@@ -151,15 +156,15 @@ export interface ExerciseInfo {
 
 export const EXERCISES: readonly ExerciseInfo[] = [
   {
-    title: 'Фича edit-task',
-    text: 'Добавь редактирование задачи: новый слайс features/edit-task (ui + model), кнопку подключи в pages/board. Сущность task при этом почти не меняется — в этом и смысл слоёв.',
+    title: 'Фильтр по исполнителю',
+    text: 'Расширь filter-tasks полем assignee или добавь отдельную фичу. Состояние фильтра принадлежит фиче, а не сущности — проверь, что TaskStore при этом не меняется.',
   },
   {
-    title: 'Сущность user и связь @x',
-    text: 'Добавь entities/user и исполнителя задачи. Свяжи сущности через entities/task/@x/user, а действие «назначить исполнителя» вынеси в features/assign-task.',
+    title: 'Сущность project',
+    text: 'Добавь проекты и группировку задач. Реши, где живёт связь: снапшот через @x внутри task или композиция на уровне pages. Сравни оба варианта на странице «Архитектура».',
   },
   {
-    title: 'Вторая страница без новых фич',
-    text: 'Сделай pages/archive со списком выполненных задач и переиспользуй delete-task и move-task. Фичи не меняются — меняется только композиция на странице.',
+    title: 'Сегмент shared/i18n',
+    text: 'Вынеси строки интерфейса в сегмент i18n слоя shared. Заметь, как слайсы становятся чище: в них остаётся только логика, а тексты приходят из фундамента.',
   },
 ];

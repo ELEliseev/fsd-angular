@@ -10,6 +10,7 @@ describe('TaskStore', () => {
     description: '',
     status: 'backlog',
     priority: 'medium',
+    assignee: null,
     createdAt: '2026-11-20T10:00:00.000Z',
   };
 
@@ -44,7 +45,13 @@ describe('TaskStore', () => {
   it('добавляет задачу в начало списка', () => {
     const created: Task = { ...task, id: 't2', title: 'Новая' };
     api.create.mockReturnValue(created);
-    store.add({ title: 'Новая', description: '', status: 'backlog', priority: 'medium' });
+    store.add({
+      title: 'Новая',
+      description: '',
+      status: 'backlog',
+      priority: 'medium',
+      assignee: null,
+    });
     expect(store.tasks()[0]).toEqual(created);
   });
 

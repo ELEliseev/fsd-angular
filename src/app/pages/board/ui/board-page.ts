@@ -1,5 +1,6 @@
 import { Component, OnInit, computed, inject } from '@angular/core';
 import { TASK_STATUS_ORDER, TaskStore } from '@entities/task';
+import { UserStore } from '@entities/user';
 import { FilterTasksStore, filterTasks } from '@features/filter-tasks';
 import { BoardColumn } from './board-column';
 import { BoardStats } from './board-stats';
@@ -13,6 +14,7 @@ import { BoardToolbar } from './board-toolbar';
 })
 export class BoardPage implements OnInit {
   private readonly store = inject(TaskStore);
+  private readonly userStore = inject(UserStore);
   private readonly filterStore = inject(FilterTasksStore);
 
   protected readonly columns = computed(() => {
@@ -25,5 +27,6 @@ export class BoardPage implements OnInit {
 
   ngOnInit(): void {
     this.store.load();
+    this.userStore.load();
   }
 }
