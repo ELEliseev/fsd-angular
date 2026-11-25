@@ -79,8 +79,7 @@ export const LAYERS: readonly LayerInfo[] = [
       'task/model — типы, метаданные статусов, TaskStore на signals',
       'task/api — запросы к mock-бэкенду, стартовые данные',
       'task/ui — task-card, priority-badge',
-      'user/ — исполнитель: model, api, ui (user-avatar)',
-      'user/@x/task — cross-import API: тип User и UserAvatar для сущности task',
+      'user/ — исполнитель: model, api, ui (user-avatar); task ссылается через assigneeId',
       'comment/ — комментарии: model, api, ui (comment-item); связь с task через taskId',
     ],
   },
@@ -115,7 +114,7 @@ export const RULES: readonly RuleInfo[] = [
   },
   {
     title: 'Изоляция слайсов и @x',
-    text: 'Слайсы одного слоя не знают друг о друге. В проекте два паттерна связи: task → user — снапшот через cross-import API entities/user/@x/task (как Artist.songs в спецификации); comment → task — нормализованный taskId без импорта сущности, а сборка задачи с комментариями происходит выше, в pages/task.',
+    text: 'Слайсы одного слоя не знают друг о друге. Обе связи в проекте нормализованы: task.assigneeId и comment.taskId — просто id, а join происходит выше, в pages (аватар исполнителя проецируется в слот карточки). Спецификация допускает и явную связь через cross-import API @x — entities/user/@x/task — когда сущность содержит данные другой (как Artist.songs); здесь выбран полный распил ради изоляции.',
   },
 ];
 

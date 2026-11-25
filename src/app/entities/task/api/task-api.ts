@@ -6,15 +6,22 @@ import { createSeedTasks } from './task-seed';
 
 const TABLE = 'tasks';
 
+interface StoredTask extends Task {
+  assignee?: { id: string } | null;
+}
+
 @Injectable({ providedIn: 'root' })
 export class TaskApi {
   private readonly db = inject(MockDb);
 
   getAll(): readonly Task[] {
-    const stored = this.db.read<readonly Task[]>(TABLE);
+    const stored = this.db.read<readonly StoredTask[]>(TABLE);
     if (stored !== null) {
-      // данные до появления исполнителя могли сохраниться без поля assignee
-      return stored.map((task) => ({ ...task, assignee: task.assignee ?? null }));
+      // миграция: снапшот assignee из прошлой версии заменяем на assigneeId
+      return stored.map(({ assignee, ...task }) => ({
+        ...task,
+        assigneeId: task.assigneeId ?? assignee?.id ?? null,
+      }));
     }
     const seed = createSeedTasks();
     this.db.write(TABLE, seed);

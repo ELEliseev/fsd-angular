@@ -14,6 +14,12 @@
         />
       } @else {
         <task-card [task]="task">
+          @if (assigneeOf(task); as assignee) {
+            <span card-assignee class="assignee-chip">
+              <user-avatar [user]="assignee" />
+              {{ assignee.name }}
+            </span>
+          }
           <div card-actions class="card-actions">
             <assign-task-control [task]="task" />
             <div class="card-actions__buttons">

@@ -26,7 +26,7 @@ describe('MoveTask', () => {
     description: '',
     status: 'backlog',
     priority: 'medium',
-    assignee: null,
+    assigneeId: null,
     createdAt: '2026-11-20T10:00:00.000Z',
   };
 

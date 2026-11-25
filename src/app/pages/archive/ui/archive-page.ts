@@ -1,7 +1,7 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { TaskCard, TaskStore } from '@entities/task';
-import { UserStore } from '@entities/user';
+import { TaskCard, TaskStore, type Task } from '@entities/task';
+import { UserAvatar, UserStore, type User } from '@entities/user';
 import { AssignTaskControl } from '@features/assign-task';
 import { DeleteTaskButton } from '@features/delete-task';
 import { EditTaskForm } from '@features/edit-task';
@@ -13,6 +13,7 @@ import { UiIcon, UiIconButton } from '@shared/ui';
   selector: 'archive-page',
   imports: [
     TaskCard,
+    UserAvatar,
     FilterTasksBar,
     MoveTaskButtons,
     DeleteTaskButton,
@@ -46,5 +47,12 @@ export class ArchivePage implements OnInit {
 
   protected openTask(id: string): void {
     void this.router.navigate(['/task', id]);
+  }
+
+  protected assigneeOf(task: Task): User | null {
+    if (task.assigneeId === null) {
+      return null;
+    }
+    return this.userStore.users().find((user) => user.id === task.assigneeId) ?? null;
   }
 }

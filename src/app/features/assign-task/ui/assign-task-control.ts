@@ -28,11 +28,9 @@ export class AssignTaskControl {
     ...this.userStore.users().map((user) => ({ value: user.id, label: user.name })),
   ]);
 
-  protected readonly value = computed(() => this.task().assignee?.id ?? '');
+  protected readonly value = computed(() => this.task().assigneeId ?? '');
 
   protected onChange(id: string): void {
-    const assignee =
-      id === '' ? null : (this.userStore.users().find((user) => user.id === id) ?? null);
-    this.assignTask.execute(this.task(), assignee);
+    this.assignTask.execute(this.task(), id === '' ? null : id);
   }
 }

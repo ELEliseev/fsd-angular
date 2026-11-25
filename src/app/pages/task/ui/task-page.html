@@ -2,7 +2,14 @@
   <a class="task-page__back" routerLink="/">← К доске</a>
 
   @if (task(); as t) {
-    <task-card [task]="t" />
+    <task-card [task]="t">
+      @if (assigneeOf(t); as assignee) {
+        <span card-assignee class="assignee-chip">
+          <user-avatar [user]="assignee" />
+          {{ assignee.name }}
+        </span>
+      }
+    </task-card>
 
     <div class="task-page__comments">
       <h2>

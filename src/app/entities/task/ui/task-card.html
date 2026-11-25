@@ -2,12 +2,7 @@
   <div class="card__meta">
     <priority-badge [priority]="task().priority" />
     <div class="card__meta-right">
-      @if (task().assignee; as assignee) {
-        <span class="card__assignee">
-          <user-avatar [user]="assignee" />
-          {{ assignee.name }}
-        </span>
-      }
+      <ng-content select="[card-assignee]" />
       <time class="card__date">{{ createdAt() }}</time>
     </div>
   </div>

@@ -10,7 +10,7 @@ describe('TaskStore', () => {
     description: '',
     status: 'backlog',
     priority: 'medium',
-    assignee: null,
+    assigneeId: null,
     createdAt: '2026-11-20T10:00:00.000Z',
   };
 
@@ -50,7 +50,7 @@ describe('TaskStore', () => {
       description: '',
       status: 'backlog',
       priority: 'medium',
-      assignee: null,
+      assigneeId: null,
     });
     expect(store.tasks()[0]).toEqual(created);
   });

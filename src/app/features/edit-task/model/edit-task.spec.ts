@@ -9,7 +9,7 @@ describe('EditTask', () => {
     description: 'Старое описание',
     status: 'in-progress',
     priority: 'low',
-    assignee: null,
+    assigneeId: null,
     createdAt: '2026-11-20T10:00:00.000Z',
   };
 

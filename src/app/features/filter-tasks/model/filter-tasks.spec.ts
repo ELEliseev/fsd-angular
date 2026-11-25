@@ -9,7 +9,7 @@ describe('filterTasks', () => {
       description: 'В магазине у дома',
       status: 'backlog',
       priority: 'low',
-      assignee: null,
+      assigneeId: null,
       createdAt: '2026-11-20T10:00:00.000Z',
     },
     {
@@ -18,7 +18,7 @@ describe('filterTasks', () => {
       description: 'Упал CI на линтере',
       status: 'in-progress',
       priority: 'high',
-      assignee: null,
+      assigneeId: null,
       createdAt: '2026-11-21T10:00:00.000Z',
     },
   ];

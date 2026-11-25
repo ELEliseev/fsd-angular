@@ -51,7 +51,7 @@ src/app/
 │   └── delete-comment/
 ├── entities/             # слой entities: бизнес-сущности
 │   ├── task/             # model (types, store), api, ui (task-card, priority-badge)
-│   ├── user/             # model, api, ui (user-avatar) + @x/task для сущности task
+│   ├── user/             # model, api, ui (user-avatar); task ссылается через assigneeId
 │   └── comment/          # model, api, ui (comment-item); связь с task через taskId
 └── shared/               # слой shared: фундамент без бизнес-логики
     ├── ui/               # button, icon-button, input, select, icon
@@ -71,12 +71,14 @@ src/app/
    `index.ts` с явными ре-экспортами, без `export *`. Внутри слайса — относительные
    импорты, между слайсами — алиасы.
 3. **Изоляция слайсов и `@x`.** Слайсы одного слоя не знают друг о друге.
-   В проекте два паттерна связи сущностей:
-   - `task → user`: снапшот через cross-import API `entities/user/@x/task`
-     (отдаёт тип `User` и `UserAvatar` только для task) — как `Artist.songs`
-     в примере из спецификации; логику назначения держит `features/assign-task`;
-   - `comment → task`: нормализованный `taskId` без импорта сущности;
-     сборка задачи с комментариями происходит выше — в `pages/task`.
+   Обе связи в проекте нормализованы: `task.assigneeId` и `comment.taskId` —
+   просто id, а join происходит выше, в `pages` (страница ищет пользователя
+   в `UserStore` и проецирует аватар в слот `[card-assignee]` карточки).
+   Спецификация допускает и явную связь через cross-import API `@x`
+   (`entities/user/@x/task` отдавал бы тип `User` только для task) — для случаев,
+   когда сущность содержит данные другой, как `Artist.songs` в примере из доки.
+   Здесь выбран полный распил: сущности независимы, цена — композиция
+   в каждом потребителе карточки.
 
 ### Почему нет слоя widgets
 
@@ -97,8 +99,8 @@ layout — в `app`. Поэтому колонки, тулбар и статис
 
 ## Как прочитать код за 5 минут
 
-1. `entities/task/model/types.ts` — что такое задача в этом проекте; импорт
-   `User` через `@entities/user/@x/task` — связь сущностей в действии.
+1. `entities/task/model/types.ts` — что такое задача в этом проекте;
+   `assigneeId` — нормализованная ссылка на исполнителя без импорта user.
 2. `entities/task/model/task-store.ts` — состояние на signals и CRUD.
 3. `features/move-task/` — типичная фича: `ui` вызывает свой `model`,
    `model` обновляет стор сущности.

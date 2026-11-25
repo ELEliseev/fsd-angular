@@ -39,7 +39,7 @@ export class CreateTaskForm {
       description: this.description(),
       priority: this.priority(),
       status: 'backlog',
-      assignee: null,
+      assigneeId: null,
     });
     this.title.set('');
     this.description.set('');

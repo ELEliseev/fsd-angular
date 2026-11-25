@@ -20,14 +20,14 @@ describe('CreateTask', () => {
       description: '  детали  ',
       status: 'backlog',
       priority: 'high',
-      assignee: null,
+      assigneeId: null,
     });
     expect(add).toHaveBeenCalledWith({
       title: 'Новая задача',
       description: 'детали',
       status: 'backlog',
       priority: 'high',
-      assignee: null,
+      assigneeId: null,
     });
   });
 
@@ -38,7 +38,7 @@ describe('CreateTask', () => {
         description: '',
         status: 'backlog',
         priority: 'low',
-        assignee: null,
+        assigneeId: null,
       }),
     ).toThrow('Название задачи не может быть пустым');
     expect(add).not.toHaveBeenCalled();
