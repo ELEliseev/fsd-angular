@@ -1,0 +1,8 @@
+<div class="move">
+  <ui-icon-button [label]="prevLabel()" [disabled]="prevStatus() === null" (click)="move('prev')">
+    <ui-icon name="arrow-left" />
+  </ui-icon-button>
+  <ui-icon-button [label]="nextLabel()" [disabled]="nextStatus() === null" (click)="move('next')">
+    <ui-icon name="arrow-right" />
+  </ui-icon-button>
+</div>

@@ -1,0 +1,8 @@
+<div class="stats">
+  <span class="stats__chip stats__chip--total">Всего: {{ total() }}</span>
+  @for (item of stats(); track item.status) {
+    <span [class]="'stats__chip stats__chip--' + item.status">
+      {{ item.label }}: {{ item.count }}
+    </span>
+  }
+</div>

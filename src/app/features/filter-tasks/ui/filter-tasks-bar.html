@@ -1,0 +1,15 @@
+<div class="filter-bar">
+  <div class="filter-bar__search">
+    <ui-input placeholder="Поиск по названию и описанию" [(value)]="store.query" />
+  </div>
+  <div class="filter-bar__priority">
+    <ui-select
+      [options]="priorityOptions"
+      [value]="store.priority()"
+      (valueChange)="setPriority($event)"
+    />
+  </div>
+  @if (hasActiveFilter()) {
+    <ui-button variant="ghost" (click)="store.reset()">Сбросить</ui-button>
+  }
+</div>

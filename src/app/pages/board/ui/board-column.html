@@ -1,0 +1,19 @@
+<section [class]="'column column--' + status()">
+  <header class="column__head">
+    <span class="column__dot"></span>
+    <h2>{{ label() }}</h2>
+    <span class="column__count">{{ tasks().length }}</span>
+  </header>
+  <div class="column__list">
+    @for (task of tasks(); track task.id) {
+      <task-card [task]="task">
+        <div card-actions class="card-actions">
+          <move-task-buttons [task]="task" />
+          <delete-task-button [task]="task" />
+        </div>
+      </task-card>
+    } @empty {
+      <p class="column__empty">Пока пусто</p>
+    }
+  </div>
+</section>

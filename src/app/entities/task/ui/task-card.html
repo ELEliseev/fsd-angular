@@ -1,0 +1,13 @@
+<article class="card">
+  <div class="card__meta">
+    <priority-badge [priority]="task().priority" />
+    <time class="card__date">{{ createdAt() }}</time>
+  </div>
+  <h3 class="card__title">{{ task().title }}</h3>
+  @if (task().description) {
+    <p class="card__description">{{ task().description }}</p>
+  }
+  <div class="card__actions">
+    <ng-content select="[card-actions]" />
+  </div>
+</article>

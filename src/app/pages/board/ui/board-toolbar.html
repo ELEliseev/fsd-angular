@@ -1,0 +1,10 @@
+<div class="toolbar">
+  <filter-tasks-bar />
+  <ui-button (click)="creating.set(!creating())">
+    <ui-icon name="plus" />
+    Новая задача
+  </ui-button>
+</div>
+@if (creating()) {
+  <create-task-form (created)="creating.set(false)" (cancelled)="creating.set(false)" />
+}

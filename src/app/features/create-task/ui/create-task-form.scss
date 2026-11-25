@@ -1,0 +1,26 @@
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+
+  &__row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 0.85rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .create-form__row {
+    grid-template-columns: 1fr;
+  }
+}

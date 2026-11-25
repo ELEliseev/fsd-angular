@@ -1,0 +1,28 @@
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  min-width: 0;
+
+  &__search {
+    flex: 1;
+    min-width: 8rem;
+    max-width: 22rem;
+  }
+
+  &__priority {
+    width: 11rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .filter-bar {
+    flex-wrap: wrap;
+
+    &__search {
+      max-width: none;
+      flex-basis: 100%;
+    }
+  }
+}

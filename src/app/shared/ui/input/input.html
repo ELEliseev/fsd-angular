@@ -1,0 +1,21 @@
+<label class="field">
+  @if (label()) {
+    <span class="field__label">{{ label() }}</span>
+  }
+  @if (multiline()) {
+    <textarea
+      class="field__control"
+      rows="3"
+      [placeholder]="placeholder()"
+      [value]="value()"
+      (input)="onInput($event)"
+    ></textarea>
+  } @else {
+    <input
+      class="field__control"
+      [placeholder]="placeholder()"
+      [value]="value()"
+      (input)="onInput($event)"
+    />
+  }
+</label>

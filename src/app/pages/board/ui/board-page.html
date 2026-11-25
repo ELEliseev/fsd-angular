@@ -1,0 +1,22 @@
+<section class="board-page">
+  <div class="board-page__head">
+    <h1>Доска задач</h1>
+    <p class="board-page__subtitle">
+      Данные — в <code>entities/task</code>, действия — в <code>features</code>, композиция — здесь,
+      в <code>pages/board</code>.
+    </p>
+  </div>
+
+  <board-stats />
+  <board-toolbar />
+
+  @if (loading()) {
+    <div class="board-page__loading">Загружаем задачи…</div>
+  } @else {
+    <div class="board-page__columns">
+      @for (column of columns(); track column.status) {
+        <board-column [status]="column.status" [tasks]="column.tasks" />
+      }
+    </div>
+  }
+</section>

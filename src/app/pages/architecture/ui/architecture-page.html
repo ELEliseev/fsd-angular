@@ -1,0 +1,91 @@
+<section class="arch">
+  <div class="arch__head">
+    <h1>Feature-Sliced Design</h1>
+    <p>
+      Архитектура этого проекта по официальной спецификации
+      <a href="https://fsd.how" target="_blank" rel="noopener">fsd.how</a>: слои, слайсы, сегменты и
+      правила импортов — всё можно потрогать в коде рядом.
+    </p>
+  </div>
+
+  <h2>Слои этого проекта</h2>
+  <p class="arch__hint">
+    Порядок сверху вниз — от большей ответственности к меньшей. Импорты разрешены только вниз.
+  </p>
+  <div class="layers">
+    @for (layer of layers; track layer.name) {
+      <article
+        [class]="
+          'layer' +
+          (layer.used ? '' : ' layer--unused') +
+          (layer.note ? ' layer--' + layer.note : '')
+        "
+      >
+        <div class="layer__name">
+          <span class="layer__folder">{{ layer.name }}/</span>
+          @if (layer.alias) {
+            <code class="layer__alias">{{ layer.alias }}/*</code>
+          }
+          @if (layer.note === 'deprecated') {
+            <span class="layer__tag">deprecated</span>
+          }
+          @if (layer.note === 'discouraged') {
+            <span class="layer__tag">не рекомендуется</span>
+          }
+        </div>
+        <p class="layer__purpose">{{ layer.purpose }}</p>
+        @if (layer.contents.length > 0) {
+          <ul class="layer__contents">
+            @for (item of layer.contents; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        }
+      </article>
+    }
+  </div>
+
+  <h2>Три главных правила</h2>
+  <div class="rules">
+    @for (rule of rules; track rule.title) {
+      <article class="rule">
+        <h3>{{ rule.title }}</h3>
+        <p>{{ rule.text }}</p>
+      </article>
+    }
+  </div>
+
+  <h2>Путь одного действия</h2>
+  <p class="arch__hint">
+    Что происходит, когда ты нажимаешь «→» на карточке — сверху вниз по слоям:
+  </p>
+  <ol class="trace">
+    @for (item of trace; track item.step) {
+      <li class="trace__step">
+        <div class="trace__title">
+          <strong>{{ item.step }}</strong>
+          <code>{{ item.where }}</code>
+        </div>
+        <p>{{ item.detail }}</p>
+      </li>
+    }
+  </ol>
+
+  <h2>Упражнения</h2>
+  <div class="exercises">
+    @for (exercise of exercises; track exercise.title) {
+      <article class="exercise">
+        <h3>
+          <ui-icon name="check" />
+          {{ exercise.title }}
+        </h3>
+        <p>{{ exercise.text }}</p>
+      </article>
+    }
+  </div>
+
+  <p class="arch__footer">
+    Проверить структуру линтером: <code>npm run lint:fsd</code> (Steiger). Полная документация:
+    <a href="https://fsd.how/docs/llms/" target="_blank" rel="noopener">fsd.how/docs/llms</a>.
+  </p>
+</section>

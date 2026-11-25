@@ -1,0 +1,27 @@
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  &__chip {
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-dim);
+
+    &--total {
+      color: var(--text);
+    }
+
+    &--in-progress {
+      color: var(--accent);
+    }
+
+    &--done {
+      color: var(--success);
+    }
+  }
+}
