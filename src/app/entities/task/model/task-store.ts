@@ -6,16 +6,16 @@ import type { NewTask, Task } from './types';
 export class TaskStore {
   private readonly api = inject(TaskApi);
   private readonly items = signal<readonly Task[]>([]);
-  private loaded = false;
+  private readonly loaded = signal(false);
 
   readonly tasks = this.items.asReadonly();
 
   load(): void {
-    if (this.loaded) {
+    if (this.loaded()) {
       return;
     }
     this.items.set(this.api.getAll());
-    this.loaded = true;
+    this.loaded.set(true);
   }
 
   add(input: NewTask): void {
