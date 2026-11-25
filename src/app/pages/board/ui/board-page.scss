@@ -23,12 +23,6 @@
     }
   }
 
-  &__loading {
-    padding: 3rem 1rem;
-    text-align: center;
-    color: var(--text-dim);
-  }
-
   &__columns {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));

@@ -22,7 +22,7 @@ npm run lint:fsd   # проверка архитектуры линтером St
 - Angular 21: standalone-компоненты, signals, zoneless, новый control flow (`@if`/`@for`)
 - TypeScript (strict), SCSS
 - Vitest для тестов, [Steiger](https://github.com/feature-sliced/steiger) для проверки FSD
-- Mock-бэкенд на localStorage с имитацией сетевой задержки (`shared/api`)
+- Синхронный mock-бэкенд на localStorage (`shared/api`) — стор и фичи полностью на signals, без промисов
 
 ## Структура
 

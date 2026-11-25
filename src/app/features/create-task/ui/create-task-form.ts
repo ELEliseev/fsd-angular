@@ -18,13 +18,12 @@ export class CreateTaskForm {
   protected readonly title = signal('');
   protected readonly description = signal('');
   protected readonly priority = signal<TaskPriority>('medium');
-  protected readonly submitting = signal(false);
 
   protected readonly priorityOptions: readonly UiSelectOption[] = TASK_PRIORITY_ORDER.map(
     (priority) => ({ value: priority, label: TASK_PRIORITY_LABELS[priority] }),
   );
 
-  protected readonly canSubmit = computed(() => this.title().trim() !== '' && !this.submitting());
+  protected readonly canSubmit = computed(() => this.title().trim() !== '');
 
   protected setPriority(value: string): void {
     this.priority.set(value as TaskPriority);
@@ -32,27 +31,18 @@ export class CreateTaskForm {
 
   protected onSubmit(event: Event): void {
     event.preventDefault();
-    void this.submit();
-  }
-
-  private async submit(): Promise<void> {
     if (!this.canSubmit()) {
       return;
     }
-    this.submitting.set(true);
-    try {
-      await this.createTask.execute({
-        title: this.title(),
-        description: this.description(),
-        priority: this.priority(),
-        status: 'backlog',
-      });
-      this.title.set('');
-      this.description.set('');
-      this.priority.set('medium');
-      this.created.emit();
-    } finally {
-      this.submitting.set(false);
-    }
+    this.createTask.execute({
+      title: this.title(),
+      description: this.description(),
+      priority: this.priority(),
+      status: 'backlog',
+    });
+    this.title.set('');
+    this.description.set('');
+    this.priority.set('medium');
+    this.created.emit();
   }
 }

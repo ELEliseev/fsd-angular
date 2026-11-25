@@ -30,23 +30,23 @@ describe('MoveTask', () => {
   };
 
   let moveTask: MoveTask;
-  let update: ReturnType<typeof vi.fn<(task: Task) => Promise<void>>>;
+  let update: ReturnType<typeof vi.fn<(task: Task) => void>>;
 
   beforeEach(() => {
-    update = vi.fn<(task: Task) => Promise<void>>().mockResolvedValue(undefined);
+    update = vi.fn<(task: Task) => void>();
     TestBed.configureTestingModule({
       providers: [MoveTask, { provide: TaskStore, useValue: { update } }],
     });
     moveTask = TestBed.inject(MoveTask);
   });
 
-  it('переносит задачу в соседний статус', async () => {
-    await moveTask.execute(task, 'next');
+  it('переносит задачу в соседний статус', () => {
+    moveTask.execute(task, 'next');
     expect(update).toHaveBeenCalledWith({ ...task, status: 'in-progress' });
   });
 
-  it('не трогает стор на краю доски', async () => {
-    await moveTask.execute(task, 'prev');
+  it('не трогает стор на краю доски', () => {
+    moveTask.execute(task, 'prev');
     expect(update).not.toHaveBeenCalled();
   });
 });

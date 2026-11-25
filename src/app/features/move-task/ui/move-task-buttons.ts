@@ -28,6 +28,6 @@ export class MoveTaskButtons {
   });
 
   protected move(direction: MoveDirection): void {
-    void this.moveTask.execute(this.task(), direction);
+    this.moveTask.execute(this.task(), direction);
   }
 }

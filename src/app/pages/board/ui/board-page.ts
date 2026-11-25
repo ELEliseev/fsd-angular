@@ -15,8 +15,6 @@ export class BoardPage implements OnInit {
   private readonly store = inject(TaskStore);
   private readonly filterStore = inject(FilterTasksStore);
 
-  protected readonly loading = this.store.loading;
-
   protected readonly columns = computed(() => {
     const tasks = filterTasks(this.store.tasks(), this.filterStore.filter());
     return TASK_STATUS_ORDER.map((status) => ({
@@ -26,6 +24,6 @@ export class BoardPage implements OnInit {
   });
 
   ngOnInit(): void {
-    void this.store.load();
+    this.store.load();
   }
 }

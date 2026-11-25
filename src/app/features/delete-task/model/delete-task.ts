@@ -5,7 +5,7 @@ import { TaskStore } from '@entities/task';
 export class DeleteTask {
   private readonly store = inject(TaskStore);
 
-  execute(id: string): Promise<void> {
-    return this.store.remove(id);
+  execute(id: string): void {
+    this.store.remove(id);
   }
 }

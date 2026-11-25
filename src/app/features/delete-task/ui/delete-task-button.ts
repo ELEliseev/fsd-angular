@@ -22,7 +22,7 @@ export class DeleteTaskButton {
       return;
     }
     this.armed.set(false);
-    void this.deleteTask.execute(this.task().id);
+    this.deleteTask.execute(this.task().id);
   }
 
   protected reset(): void {

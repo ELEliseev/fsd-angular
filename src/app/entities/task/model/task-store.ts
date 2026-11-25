@@ -9,33 +9,27 @@ export class TaskStore {
   private loaded = false;
 
   readonly tasks = this.items.asReadonly();
-  readonly loading = signal(false);
 
-  async load(): Promise<void> {
+  load(): void {
     if (this.loaded) {
       return;
     }
-    this.loading.set(true);
-    try {
-      this.items.set(await this.api.getAll());
-      this.loaded = true;
-    } finally {
-      this.loading.set(false);
-    }
+    this.items.set(this.api.getAll());
+    this.loaded = true;
   }
 
-  async add(input: NewTask): Promise<void> {
-    const task = await this.api.create(input);
+  add(input: NewTask): void {
+    const task = this.api.create(input);
     this.items.update((tasks) => [task, ...tasks]);
   }
 
-  async update(task: Task): Promise<void> {
-    await this.api.update(task);
+  update(task: Task): void {
+    this.api.update(task);
     this.items.update((tasks) => tasks.map((t) => (t.id === task.id ? task : t)));
   }
 
-  async remove(id: string): Promise<void> {
-    await this.api.remove(id);
+  remove(id: string): void {
+    this.api.remove(id);
     this.items.update((tasks) => tasks.filter((t) => t.id !== id));
   }
 }

@@ -5,11 +5,11 @@ import { TaskStore, type NewTask } from '@entities/task';
 export class CreateTask {
   private readonly store = inject(TaskStore);
 
-  async execute(input: NewTask): Promise<void> {
+  execute(input: NewTask): void {
     const title = input.title.trim();
     if (title === '') {
       throw new Error('Название задачи не может быть пустым');
     }
-    await this.store.add({ ...input, title, description: input.description.trim() });
+    this.store.add({ ...input, title, description: input.description.trim() });
   }
 }

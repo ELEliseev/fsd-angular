@@ -13,11 +13,11 @@ export function adjacentStatus(status: TaskStatus, direction: MoveDirection): Ta
 export class MoveTask {
   private readonly store = inject(TaskStore);
 
-  async execute(task: Task, direction: MoveDirection): Promise<void> {
+  execute(task: Task, direction: MoveDirection): void {
     const status = adjacentStatus(task.status, direction);
     if (status === null) {
       return;
     }
-    await this.store.update({ ...task, status });
+    this.store.update({ ...task, status });
   }
 }

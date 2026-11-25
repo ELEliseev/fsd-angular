@@ -10,13 +10,9 @@
   <board-stats />
   <board-toolbar />
 
-  @if (loading()) {
-    <div class="board-page__loading">Загружаем задачи…</div>
-  } @else {
-    <div class="board-page__columns">
-      @for (column of columns(); track column.status) {
-        <board-column [status]="column.status" [tasks]="column.tasks" />
-      }
-    </div>
-  }
+  <div class="board-page__columns">
+    @for (column of columns(); track column.status) {
+      <board-column [status]="column.status" [tasks]="column.tasks" />
+    }
+  </div>
 </section>

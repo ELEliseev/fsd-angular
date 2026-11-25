@@ -84,7 +84,7 @@ export const LAYERS: readonly LayerInfo[] = [
     contents: [
       'ui/ — button, icon-button, input, select, icon',
       'lib/ — генерация id, форматирование дат',
-      'api/ — MockDb поверх localStorage с имитацией задержки',
+      'api/ — синхронный MockDb поверх localStorage',
       'config/ — имя приложения, префикс хранилища',
     ],
   },

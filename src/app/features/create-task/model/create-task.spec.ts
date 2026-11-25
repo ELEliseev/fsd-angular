@@ -4,18 +4,18 @@ import { CreateTask } from './create-task';
 
 describe('CreateTask', () => {
   let createTask: CreateTask;
-  let add: ReturnType<typeof vi.fn<(input: NewTask) => Promise<void>>>;
+  let add: ReturnType<typeof vi.fn<(input: NewTask) => void>>;
 
   beforeEach(() => {
-    add = vi.fn<(input: NewTask) => Promise<void>>().mockResolvedValue(undefined);
+    add = vi.fn<(input: NewTask) => void>();
     TestBed.configureTestingModule({
       providers: [CreateTask, { provide: TaskStore, useValue: { add } }],
     });
     createTask = TestBed.inject(CreateTask);
   });
 
-  it('обрезает пробелы в названии и описании', async () => {
-    await createTask.execute({
+  it('обрезает пробелы в названии и описании', () => {
+    createTask.execute({
       title: '  Новая задача  ',
       description: '  детали  ',
       status: 'backlog',
@@ -29,10 +29,10 @@ describe('CreateTask', () => {
     });
   });
 
-  it('не создаёт задачу с пустым названием', async () => {
-    await expect(
+  it('не создаёт задачу с пустым названием', () => {
+    expect(() =>
       createTask.execute({ title: '   ', description: '', status: 'backlog', priority: 'low' }),
-    ).rejects.toThrow('Название задачи не может быть пустым');
+    ).toThrow('Название задачи не может быть пустым');
     expect(add).not.toHaveBeenCalled();
   });
 });
