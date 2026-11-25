@@ -1,4 +1,5 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { TaskCard, TaskStore } from '@entities/task';
 import { UserStore } from '@entities/user';
 import { AssignTaskControl } from '@features/assign-task';
@@ -24,6 +25,7 @@ import { UiIcon, UiIconButton } from '@shared/ui';
   styleUrl: './archive-page.scss',
 })
 export class ArchivePage implements OnInit {
+  private readonly router = inject(Router);
   private readonly store = inject(TaskStore);
   private readonly userStore = inject(UserStore);
   private readonly filterStore = inject(FilterTasksStore);
@@ -40,5 +42,9 @@ export class ArchivePage implements OnInit {
   ngOnInit(): void {
     this.store.load();
     this.userStore.load();
+  }
+
+  protected openTask(id: string): void {
+    void this.router.navigate(['/task', id]);
   }
 }

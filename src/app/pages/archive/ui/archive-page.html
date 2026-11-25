@@ -23,6 +23,9 @@
           <div card-actions class="card-actions">
             <assign-task-control [task]="task" />
             <div class="card-actions__buttons">
+              <ui-icon-button label="Открыть задачу" (click)="openTask(task.id)">
+                <ui-icon name="open" />
+              </ui-icon-button>
               <ui-icon-button label="Редактировать задачу" (click)="editingId.set(task.id)">
                 <ui-icon name="pencil" />
               </ui-icon-button>

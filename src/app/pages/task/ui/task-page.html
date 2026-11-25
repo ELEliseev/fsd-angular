@@ -1,0 +1,26 @@
+<section class="task-page">
+  <a class="task-page__back" routerLink="/">← К доске</a>
+
+  @if (task(); as t) {
+    <task-card [task]="t" />
+
+    <div class="task-page__comments">
+      <h2>
+        <ui-icon name="chat" />
+        Комментарии ({{ comments().length }})
+      </h2>
+      @for (comment of comments(); track comment.id) {
+        <comment-item [comment]="comment">
+          <div comment-actions>
+            <delete-comment-button [comment]="comment" />
+          </div>
+        </comment-item>
+      } @empty {
+        <p class="task-page__empty">Пока нет комментариев — будь первым.</p>
+      }
+      <add-comment-form [taskId]="t.id" />
+    </div>
+  } @else {
+    <p class="task-page__missing">Задача не найдена.</p>
+  }
+</section>

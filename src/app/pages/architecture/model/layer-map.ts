@@ -39,6 +39,7 @@ export const LAYERS: readonly LayerInfo[] = [
     contents: [
       'board/ — канбан-доска: board-page, board-column, board-stats, board-toolbar',
       'archive/ — выполненные задачи, переиспользует фичи доски',
+      'task/ — страница задачи с комментариями, роут с параметром :id',
       'architecture/ — эта страница: ui + model с данными карты слоёв',
     ],
   },
@@ -64,6 +65,8 @@ export const LAYERS: readonly LayerInfo[] = [
       'delete-task/ — удаление с подтверждением',
       'assign-task/ — назначение исполнителя из entities/user',
       'filter-tasks/ — поиск и фильтр по приоритету (своё состояние)',
+      'add-comment/ — добавление комментария к задаче',
+      'delete-comment/ — удаление комментария с подтверждением',
     ],
   },
   {
@@ -78,6 +81,7 @@ export const LAYERS: readonly LayerInfo[] = [
       'task/ui — task-card, priority-badge',
       'user/ — исполнитель: model, api, ui (user-avatar)',
       'user/@x/task — cross-import API: тип User и UserAvatar для сущности task',
+      'comment/ — комментарии: model, api, ui (comment-item); связь с task через taskId',
     ],
   },
   {
@@ -111,7 +115,7 @@ export const RULES: readonly RuleInfo[] = [
   },
   {
     title: 'Изоляция слайсов и @x',
-    text: 'Слайсы одного слоя не знают друг о друге. Связь task → user оформлена явным cross-import API: entities/user/@x/task отдаёт тип User и UserAvatar только для task. Task.assignee хранит снапшот пользователя — как Artist.songs в примере из спецификации; логику назначения держит features/assign-task.',
+    text: 'Слайсы одного слоя не знают друг о друге. В проекте два паттерна связи: task → user — снапшот через cross-import API entities/user/@x/task (как Artist.songs в спецификации); comment → task — нормализованный taskId без импорта сущности, а сборка задачи с комментариями происходит выше, в pages/task.',
   },
 ];
 

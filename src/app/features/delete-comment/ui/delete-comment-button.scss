@@ -1,0 +1,15 @@
+:host {
+  display: inline-flex;
+}
+
+.confirm {
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--danger);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--danger) 15%, transparent);
+  color: var(--danger);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+}

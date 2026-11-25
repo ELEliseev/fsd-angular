@@ -1,0 +1,4 @@
+<form class="add-comment" (submit)="onSubmit($event)">
+  <ui-input placeholder="Написать комментарий…" [multiline]="true" [(value)]="text" />
+  <ui-button type="submit" [disabled]="!canSubmit()">Отправить</ui-button>
+</form>

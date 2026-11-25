@@ -1,0 +1,7 @@
+@if (armed()) {
+  <button type="button" class="confirm" (click)="confirm()" (mouseleave)="reset()">Удалить?</button>
+} @else {
+  <ui-icon-button label="Удалить комментарий" (click)="confirm()">
+    <ui-icon name="trash" />
+  </ui-icon-button>
+}

@@ -10,6 +10,8 @@ export const ICON_PATHS = {
   ],
   board: ['M4 4h4v16H4z', 'M10 4h4v10h-4z', 'M16 4h4v13h-4z'],
   pencil: ['M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z'],
+  open: ['M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6', 'M15 3h6v6', 'M10 14 21 3'],
+  chat: ['M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'],
   layers: ['m12 2 10 6-10 6L2 8z', 'm2 14 10 6 10-6'],
   check: ['M20 6 9 17l-5-5'],
 } as const satisfies Record<string, readonly string[]>;

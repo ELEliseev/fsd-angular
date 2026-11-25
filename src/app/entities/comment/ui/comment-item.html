@@ -1,0 +1,7 @@
+<article class="comment">
+  <p class="comment__text">{{ comment().text }}</p>
+  <div class="comment__meta">
+    <time class="comment__date">{{ createdAt() }}</time>
+    <ng-content select="[comment-actions]" />
+  </div>
+</article>
